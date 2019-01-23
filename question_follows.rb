@@ -1,5 +1,6 @@
 require_relative "questions_db_connect.rb"
 require_relative "users.rb"
+require_relative "questions.rb"
 
 class QuestionFollows
 
@@ -31,6 +32,21 @@ class QuestionFollows
         output.map{|oopy| Users.new(oopy)}
     end    
 
+    def self.followers_for_user_id(user_id)
+        output = QuestionsDBConnect.instance.execute(<<-SQL, user_id)
+            SELECT 
+                questions.*  
+            FROM
+                questions_follows AS qf
+            JOIN 
+                questions ON qf.author_id = questions.author_id
+            WHERE 
+                qf.author_id = ?
+        SQL
+        output.map{|oopy| Questions.new(oopy)}
+    end    
+
+
     def initialize(options)
         @id = options["id"]
         @author_id = options["author_id"]
@@ -42,5 +58,6 @@ end
 
 if __FILE__ == $PROGRAM_NAME
     #p QuestionFollows.find_by_id(0)
-    p QuestionFollows.followers_for_question_id(112)
+    # p QuestionFollows.followers_for_question_id(112)
+    p QuestionFollows.followers_for_user_id(11)
 end

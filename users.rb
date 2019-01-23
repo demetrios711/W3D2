@@ -1,6 +1,7 @@
 require_relative "questions_db_connect.rb"
 require_relative "questions.rb"
 require_relative "replies.rb"
+require_relative "question_follows.rb"
 
 class Users
 
@@ -44,6 +45,10 @@ class Users
         Replies.find_by_author(@id)
     end
 
+    def followed_questions
+        QuestionFollows.followers_for_user_id(@id)
+    end
+
 
 end
 
@@ -53,6 +58,7 @@ if __FILE__ == $PROGRAM_NAME
     dog = Users.new({"id" => 11, "fname" => "Frank", "lname" => "The Dog"})
     # p dog.authored_questions
 
-    p dog.authored_replies
+    # p dog.authored_replies
+    p dog.followed_questions
 
 end

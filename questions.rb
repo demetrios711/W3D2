@@ -1,5 +1,6 @@
 require_relative "questions_db_connect.rb"
 require_relative "replies.rb"
+require_relative "question_follows.rb"
 class Questions
 
     attr_accessor :id, :title, :body, :author_id
@@ -51,6 +52,10 @@ class Questions
         Replies.find_by_question_id(@id)
     end
 
+    def followers
+        QuestionFollows.followers_for_question_id(@id)
+    end 
+
 end
 
 if __FILE__ == $PROGRAM_NAME
@@ -61,4 +66,5 @@ if __FILE__ == $PROGRAM_NAME
      "body"=>"ruby doesn't care about whitespace","author_id" => 11})
 
     p question.replies
+    p question.followers
 end

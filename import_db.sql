@@ -45,6 +45,13 @@ CREATE TABLE question_likes (
     FOREIGN KEY (question_id) REFERENCES questions(id)
 );
 
+
+INSERT INTO questions_follows ("id", "author_id", "question_id") VALUES (2, 25, 112);
+INSERT INTO questions_follows ("id", "author_id", "question_id") VALUES (1, 11, 112);
+INSERT INTO questions_follows ("id", "author_id", "question_id") VALUES (3, 26, 112);
+
+
+
 -- INSERT INTO users ("id", "fname", "lname") VALUES (1, "Demetri","Sakellaropoulos"); 
 -- INSERT INTO users ("id", "fname", "lname") VALUES (2, "Kathryn","Chu");
 
@@ -60,3 +67,5 @@ CREATE TABLE question_likes (
 
 
 -- UPDATE replies SET parent_reply_id = 3 WHERE id = 4
+
+-- INSERT INTO users ("id", "fname", "lname") VALUES (26, "Muriel", "Bagge");
