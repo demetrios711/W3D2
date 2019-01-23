@@ -6,6 +6,22 @@ class QuestionFollows
 
     attr_accessor :id, :author_id, :question_id
 
+    def self.most_followed_questions(n)
+        output = QuestionsDBConnect.instance.execute(<<-SQL, n)
+            SELECT 
+                question_id,
+                COUNT(*) AS num_of_followers
+            FROM
+                questions_follows
+            GROUP BY
+                question_id
+            ORDER BY
+                COUNT(*) DESC
+            LIMIT ?
+        SQL
+        output  
+    end
+
     def self.find_by_id(reply_id)
         reply = QuestionsDBConnect.instance.execute(<<-SQL, reply_id)
             SELECT 
@@ -59,5 +75,6 @@ end
 if __FILE__ == $PROGRAM_NAME
     #p QuestionFollows.find_by_id(0)
     # p QuestionFollows.followers_for_question_id(112)
-    p QuestionFollows.followers_for_user_id(11)
+    #p QuestionFollows.followers_for_user_id(11)
+    p QuestionFollows.most_followed_questions(3)
 end

@@ -69,3 +69,6 @@ INSERT INTO questions_follows ("id", "author_id", "question_id") VALUES (3, 26, 
 -- UPDATE replies SET parent_reply_id = 3 WHERE id = 4
 
 -- INSERT INTO users ("id", "fname", "lname") VALUES (26, "Muriel", "Bagge");
+
+
+INSERT INTO questions_follows ("id", "author_id", "question_id") VALUES (4,26,113);
